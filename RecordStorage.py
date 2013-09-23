@@ -110,6 +110,10 @@ class MongoTweetStorage(MongoStorage):
         if raw_tweet.get('lang', None) != 'en':
             return False
 
+        # only consider original tweets
+        if raw_tweet.get('retweeted_status', None):
+            return False
+
         return True
 
 
