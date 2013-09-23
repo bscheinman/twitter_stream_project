@@ -28,7 +28,8 @@ def get_tweets(api, hashtags=[], users=[], exclude_hashtags=[]):
         # tweets that we're not interested in, so we'll want to exclude those
         if exclude_hashtags:
             if reduce(or_func,
-                      map(lambda t: t['text'].lower() in exclude_hashtags, tweet['entities']['hashtags']),
+                      map(lambda t: t['text'].lower() in exclude_hashtags,
+                          tweet['entities']['hashtags']),
                       False):
                 continue
 
