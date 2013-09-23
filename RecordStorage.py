@@ -101,12 +101,12 @@ class MongoTweetStorage(MongoStorage):
     
     def include_record(self, raw_tweet):
 
-        # only consider tweets in english
+        # only consider tweets with at least one hashtag
         entities = raw_tweet.get('entities', None)
         if not entities or not entities.get('hashtags', None):
             return False
 
-        # only consider tweets with at least one hashtag
+        # only consider tweets in english
         if raw_tweet.get('lang', None) != 'en':
             return False
 
