@@ -1,2 +1,5 @@
+# python bytecode files
 *.pyc
+
+# vim swap files
 *.sw[op]

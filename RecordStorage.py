@@ -119,8 +119,8 @@ class MongoTweetStorage(MongoStorage):
 
     def extract_record(self, raw_tweet):
         '''
-            the raw json that twitter returns has a lot of extraneous data,
-            so we should convert it to a format containing only what we need
+            The raw json that Twitter returns has a lot of extraneous data,
+            so we should convert it to a format containing only what we need.
         '''
 
         tweet = {}

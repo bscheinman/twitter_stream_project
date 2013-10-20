@@ -9,6 +9,9 @@ def get_tweets(api, hashtags=[], users=[], exclude_hashtags=[]):
     query_params = { 'language': 'en' }
     exclude_hashtags = set([tag.lower() for tag in exclude_hashtags])
     or_func = lambda x, y: x or y
+    def get_hashtags(t):
+        return t['entities'].get('hashtags', []) if 'entities' in t else []
+    invalid_hashtag = lambda t: t in exclude_hashtags
     
     if hashtags:
         # this will search for tweets with ANY of the provided hashtags
@@ -28,8 +31,8 @@ def get_tweets(api, hashtags=[], users=[], exclude_hashtags=[]):
         # tweets that we're not interested in, so we'll want to exclude those
         if exclude_hashtags:
             if reduce(or_func,
-                      map(lambda t: t['text'].lower() in exclude_hashtags,
-                          tweet['entities']['hashtags']),
+                      map(lambda t: invalid_hashtag(t['text'].lower()),
+                          get_hashtags(tweet)),
                       False):
                 continue
 
